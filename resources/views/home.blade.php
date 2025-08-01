@@ -5,6 +5,8 @@
 @section('head')
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* General page setup */
         html, body {
@@ -49,8 +51,8 @@
             background-color: #8B5CF6;
         }
 
-        /* Hide the default cursor pointer on navigation links */
-        nav a {
+        /* Hide the default cursor pointer on navigation links and social links */
+        nav a, .social-floating a {
             cursor: none;
         }
 
@@ -164,6 +166,29 @@
                 opacity: 0;
             }
         }
+
+        /* Floating Social Bar Styling */
+        .social-floating {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .social-floating a {
+            color: #ccc;
+            font-size: 2.5rem;
+            transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .social-floating a:hover {
+            color: #8B5CF6;
+            transform: scale(1.2);
+        }
     </style>
 
     <script>
@@ -187,10 +212,11 @@
                 console.error('Cursor dot element not found. Please check your HTML.');
             }
 
-            // Remove the active class toggle for nav links to keep the cursor style consistent
-            if (navLinks.length > 0 && cursor) {
-                console.log('Nav links found. Adding hover listeners.');
-                navLinks.forEach(link => {
+            // Remove the active class toggle for nav links and social links to keep the cursor style consistent
+            const interactiveElements = document.querySelectorAll('nav a, .social-floating a');
+            if (interactiveElements.length > 0 && cursor) {
+                console.log('Interactive links found. Adding hover listeners.');
+                interactiveElements.forEach(link => {
                     link.addEventListener('mouseover', () => {
                         // The custom cursor dot will not change size or color on hover
                     });
@@ -315,6 +341,19 @@
             </div>
         </nav>
 
+        <!-- Floating Social Media Bar -->
+        <div class="social-floating hidden md:flex">
+            <a href="mailto:marcus@matrek.com" class="hover:text-purple-400 transition-colors duration-200" aria-label="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/marcus-grau/" class="hover:text-purple-400 transition-colors duration-200" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/MAGAweSome" class="hover:text-purple-400 transition-colors duration-200" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        </div>
+
         <!-- Main Content (SVG Logo and Text) -->
         <div class="min-h-screen relative z-10 flex flex-col items-center justify-start px-4 pt-40">
             <!-- SVG Logo "MG" -->
@@ -382,9 +421,9 @@
                     Feel free to reach out to me!
                 </p>
                 <ul class="text-lg md:text-xl text-white space-y-2">
-                    <li>Email: <a href="mailto:marcus.grau@example.com" class="text-purple-400 hover:underline">marcus.grau@example.com</a></li>
-                    <li>LinkedIn: <a href="https://www.linkedin.com/in/marcus-grau/" class="text-purple-400 hover:underline">linkedin.com/in/marcusgrau</a></li>
-                    <li>GitHub: <a href="https://github.com/MAGAweSome" class="text-purple-400 hover:underline">github.com/marcusgrau</a></li>
+                    <li>Email: <a href="mailto:marcus@matrek.com" class="text-purple-400 hover:underline">marcus@matrek.com</a></li>
+                    <li>LinkedIn: <a href="https://www.linkedin.com/in/marcus-grau/" class="text-purple-400 hover:underline">https://www.linkedin.com/in/marcus-grau/</a></li>
+                    <li>GitHub: <a href="https://github.com/MAGAweSome" class="text-purple-400 hover:underline">https://github.com/MAGAweSome</a></li>
                 </ul>
             </div>
         </section>
