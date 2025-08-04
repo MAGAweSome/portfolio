@@ -23,6 +23,7 @@
 
         <ul class="hidden md:flex space-x-8 text-xl main-nav-links">
             <li><a href="#about" class="text-gray-300 hover:text-white transition-colors duration-200 font-serif interactive-element">About</a></li>
+            <li><a href="#skills" class="text-gray-300 hover:text-white transition-colors duration-200 font-serif interactive-element">Skills</a></li>
             <li><a href="#projects" class="text-gray-300 hover:text-white transition-colors duration-200 font-serif interactive-element">Projects</a></li>
             <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200 font-serif interactive-element">Contact</a></li>
         </ul>
@@ -36,6 +37,7 @@
         </button>
         <ul class="flex flex-col space-y-8 text-4xl text-center items-center justify-center h-full">
             <li><a href="#about" class="text-gray-300 hover:text-white transition-colors duration-200 interactive-element">About</a></li>
+            <li><a href="#skills" class="text-gray-300 hover:text-white transition-colors duration-200 interactive-element">Skills</a></li>
             <li><a href="#projects" class="text-gray-300 hover:text-white transition-colors duration-200 interactive-element">Projects</a></li>
             <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors duration-200 interactive-element">Contact</a></li>
         </ul>

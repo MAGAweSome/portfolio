@@ -46,6 +46,116 @@
             </p>
         </section>
 
+        <section id="skills" class="container mx-auto px-4 py-20 min-h-screen flex flex-col items-center justify-center scroll-section">
+            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center font-serif">
+                <span class="clip-reveal" style="animation-delay: 10s;">Skills</span>
+            </h2>
+
+            <div class="w-full max-w-5xl md:mr-32 lg:mr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="skill-card p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
+                    <h3 class="text-2xl font-bold text-white mb-4 text-center font-serif">Languages & Databases</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="skill-item text-center">
+                            <i class="fab fa-php text-7xl text-purple-400 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">PHP</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-js-square text-7xl text-yellow-400 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">JavaScript</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-python text-7xl text-blue-400 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Python</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-java text-7xl text-red-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Java</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <img src="https://www.freeiconspng.com/uploads/c--logo-icon-0.png" alt="C++" class="h-16 w-16 mx-auto mb-2 logo-hover-effect">
+                            <p class="text-sm text-gray-400">C++</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" alt="C#" class="h-16 w-16 mx-auto mb-2 logo-hover-effect">
+                            <p class="text-sm text-gray-400">C#</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <img src="https://cdn.freebiesupply.com/logos/large/2x/mysql-5-logo-png-transparent.png" alt="MySQL" class="h-16 w-16 mx-auto mb-2 logo-hover-effect">
+                            <p class="text-sm text-gray-400">MySQL</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-html5 text-7xl text-orange-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">HTML5</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-css3-alt text-7xl text-blue-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">CSS3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
+                    <h3 class="text-2xl font-bold text-white mb-4 text-center font-serif">Frameworks & Libraries</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="skill-item text-center">
+                            <i class="fab fa-laravel text-7xl text-red-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Laravel</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-angular text-7xl text-red-600 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Angular</p>
+                        </div>
+                        <!-- <div class="skill-item text-center">
+                            <i class="fab fa-react text-7xl text-cyan-400 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">React</p>
+                        </div> -->
+                        <!-- <div class="skill-item text-center">
+                            <i class="fab fa-vuejs text-7xl text-green-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Vue.js</p>
+                        </div> -->
+                        <div class="skill-item text-center">
+                            <i class="fab fa-node-js text-7xl text-green-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Node.js</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2560px-Tailwind_CSS_Logo.svg.png" alt="Tailwind CSS" class="h-16 w-16 mx-auto mb-2 logo-hover-effect">
+                            <p class="text-sm text-gray-400">Tailwind CSS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
+                    <h3 class="text-2xl font-bold text-white mb-4 text-center font-serif">Tools & Platforms</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="skill-item text-center">
+                            <i class="fab fa-git-alt text-7xl text-orange-600 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Git</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-github text-7xl text-white mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">GitHub</p>
+                        </div>
+                        <!-- <div class="skill-item text-center">
+                            <i class="fab fa-gitlab text-7xl text-orange-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">GitLab</p>
+                        </div> -->
+                        <div class="skill-item text-center">
+                            <img src="https://camo.githubusercontent.com/e37d36ceb524bb24dc986aaf729ca34e87cfba3297932ed38bc96e3641010705/68747470733a2f2f636f64652e76697375616c73747564696f2e636f6d2f6173736574732f757064617465732f315f33352f6c6f676f2d696e7369646572732e706e67" alt="VS Code" class="h-16 w-16 mx-auto mb-2 logo-hover-effect">
+                            <p class="text-sm text-gray-400">VS Code</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-docker text-7xl text-blue-500 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Docker</p>
+                        </div>
+                        <div class="skill-item text-center">
+                            <i class="fab fa-linux text-7xl text-gray-400 mb-2 logo-hover-effect"></i>
+                            <p class="text-sm text-gray-400">Linux</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="projects" class="container mx-auto px-4 py-20 min-h-screen flex flex-col items-center justify-center scroll-section">
             <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center font-serif">
                 <span class="clip-reveal" style="animation-delay: 6s;">Projects</span>

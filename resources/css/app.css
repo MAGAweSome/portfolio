@@ -222,3 +222,26 @@ a, button, .interactive-element {
 .scroll-section {
     scroll-snap-align: start;
 }
+
+/* New styles for the skills section */
+.skill-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    background-color: #1f2937;
+}
+
+/*
+ * Cool effects for the skill logos on hover
+ */
+.logo-hover-effect {
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.logo-hover-effect:hover {
+    transform: scale(1.15); /* Slightly bigger pop effect */
+    filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.5)); /* A glow effect with purple shadow */
+}
