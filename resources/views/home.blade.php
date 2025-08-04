@@ -193,6 +193,18 @@
             color: #8B5CF6;
             transform: scale(1.2);
         }
+
+        /* Styling for the new contact cards and project cards */
+        .contact-card, .project-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            overflow: hidden; /* Ensures text doesn't overflow the card boundaries */
+        }
+        .contact-card:hover, .project-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            background-color: #2a2a2a;
+        }
     </style>
 
     <script>
@@ -416,23 +428,58 @@
 
         <!-- Projects Section -->
         <section id="projects" class="container mx-auto px-4 py-20 min-h-screen flex flex-col items-center justify-center">
-            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center" style="font-family: 'Times New Roman', Times, serif;">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                    <h3 class="text-3xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">Project One</h3>
-                    <p class="text-gray-400" style="font-family: 'Times New Roman', Times, serif;">A brief description of Project One. This project showcases my skills in front-end development and responsive design.</p>
-                </div>
-                <!-- Project 2 -->
-                <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                    <h3 class="text-3xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">Project Two</h3>
-                    <p class="text-gray-400" style="font-family: 'Times New Roman', Times, serif;">An overview of Project Two, a full-stack application demonstrating my back-end and database knowledge.</p>
-                </div>
-                <!-- Project 3 -->
-                <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                    <h3 class="text-3xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">Project Three</h3>
-                    <p class="text-gray-400" style="font-family: 'Times New Roman', Times, serif;">Details about Project Three, a personal side project focused on implementing a complex algorithm.</p>
-                </div>
+            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center" style="font-family: 'Times New Roman', Times, serif;">
+                <span class="clip-reveal" style="animation-delay: 5s;">Projects</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl">
+                <!-- Project 1: Pickuppuck -->
+                <a href="#" class="project-card p-8 rounded-lg shadow-lg block text-left">
+                    <h3 class="text-3xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 5.5s;">Pickuppuck</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-base md:text-lg" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 5.8s;">
+                            A comprehensive full-stack web application designed to streamline the management of a pickup hockey league. This platform automates the tracking of attendance, ice time, ice locations, and player payments, replacing cumbersome manual processes with a user-friendly and efficient digital solution.
+                        </span>
+                    </p>
+                    <p class="text-purple-400 font-bold text-sm md:text-base" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 6.1s;">
+                            Tech Stack: PHP, Laravel, MySQL, JavaScript
+                        </span>
+                    </p>
+                </a>
+                <!-- Project 2: NAC-Chatechism Saver -->
+                <a href="#" class="project-card p-8 rounded-lg shadow-lg block text-left">
+                    <h3 class="text-3xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 6.4s;">NAC-Chatechism Saver</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-base md:text-lg" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 6.7s;">
+                            A powerful Python bot engineered to automate the process of scraping and downloading all MP3 files from a specific website. The bot meticulously organizes the downloaded content into a neatly structured and intelligently named file system, demonstrating a strong command of automation and data management.
+                        </span>
+                    </p>
+                    <p class="text-purple-400 font-bold text-sm md:text-base" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 7s;">
+                            Tech Stack: Python, BeautifulSoup, Requests
+                        </span>
+                    </p>
+                </a>
+                <!-- Project 3: JordansMobileFleetService -->
+                <a href="#" class="project-card p-8 rounded-lg shadow-lg block text-left">
+                    <h3 class="text-3xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 7.3s;">Jordans Mobile Fleet Service</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-base md:text-lg" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 7.6s;">
+                            A professional and responsive website developed for a mobile truck mechanic business. This site serves as a digital storefront, detailing the services offered and providing a straightforward contact section for client inquiries. It significantly enhances the business's online presence and professional image.
+                        </span>
+                    </p>
+                    <p class="text-purple-400 font-bold text-sm md:text-base" style="font-family: 'Times New Roman', Times, serif;">
+                        <span class="clip-reveal full-width" style="animation-delay: 7.9s;">
+                            Tech Stack: HTML, CSS (Tailwind CSS), JavaScript
+                        </span>
+                    </p>
+                </a>
             </div>
         </section>
 
