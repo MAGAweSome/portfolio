@@ -111,6 +111,10 @@
             white-space: nowrap;
             clip-path: inset(0 100% 0 0);
         }
+        
+        .clip-reveal.full-width {
+            white-space: normal;
+        }
 
         @keyframes clip-text {
             0% {
@@ -385,9 +389,28 @@
 
         <!-- About Section -->
         <section id="about" class="container mx-auto px-4 py-20 min-h-screen flex flex-col items-center justify-center">
-            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center" style="font-family: 'Times New Roman', Times, serif;">About Me</h2>
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl text-center" style="font-family: 'Times New Roman', Times, serif;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center"
+                style="font-family: 'Times New Roman', Times, serif;">About Me</h2>
+            
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl text-center mb-8"
+                style="font-family: 'Times New Roman', Times, serif;">
+                <span class="clip-reveal full-width" style="animation-delay: 4s;">
+                    With a strong foundation in programming, I am a dedicated software developer who thrives on turning complex challenges into elegant solutions. My expertise spans a variety of languages and technologies, allowing me to build robust and efficient applications from the ground up. I am constantly expanding my knowledge, staying current with industry trends and new technologies to ensure my work is innovative and forward-thinking.
+                </span>
+            </p>
+
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl text-center mb-8"
+                style="font-family: 'Times New Roman', Times, serif;">
+                <span class="clip-reveal full-width" style="animation-delay: 4.5s;">
+                    My approach to development is defined by a meticulous attention to detail. I believe that the quality of code lies in the small things—a clean architecture, clear documentation, and thorough testing. This focus on precision not only results in more reliable software but also makes for a better user experience. I am highly organized and excel at coordination, managing tasks and resources to ensure projects are delivered on time and to the highest standard.
+                </span>
+            </p>
+
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl text-center"
+                style="font-family: 'Times New Roman', Times, serif;">
+                <span class="clip-reveal full-width" style="animation-delay: 5s;">
+                    I am a firm believer in the power of good teamwork. I am a collaborative and communicative professional who enjoys working closely with colleagues to achieve a shared vision. I am adept at giving and receiving constructive feedback, and I find that the best projects are built through a collective effort of diverse skills and perspectives. Whether working on a small team or a large-scale project, my goal is to foster a positive and productive environment where everyone can contribute their best work.
+                </span>
             </p>
         </section>
 
@@ -415,16 +438,38 @@
 
         <!-- Contact Section -->
         <section id="contact" class="container mx-auto px-4 py-20 min-h-screen flex flex-col items-center justify-center">
-            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center" style="font-family: 'Times New Roman', Times, serif;">Contact</h2>
-            <div class="text-center">
-                <p class="text-xl md:text-2xl text-gray-300 mb-4" style="font-family: 'Times New Roman', Times, serif;">
-                    Feel free to reach out to me!
+            <h2 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-10 text-center" style="font-family: 'Times New Roman', Times, serif;">
+                <span class="clip-reveal" style="animation-delay: 5s;">Contact</span>
+            </h2>
+            <div class="text-center mb-12">
+                <p class="text-xl md:text-2xl text-gray-300" style="font-family: 'Times New Roman', Times, serif;">
+                    <span class="clip-reveal full-width" style="animation-delay: 5.5s;">
+                        Feel free to reach out to me!
+                    </span>
                 </p>
-                <ul class="text-lg md:text-xl text-white space-y-2">
-                    <li>Email: <a href="mailto:marcus@matrek.com" class="text-purple-400 hover:underline">marcus@matrek.com</a></li>
-                    <li>LinkedIn: <a href="https://www.linkedin.com/in/marcus-grau/" class="text-purple-400 hover:underline">https://www.linkedin.com/in/marcus-grau/</a></li>
-                    <li>GitHub: <a href="https://github.com/MAGAweSome" class="text-purple-400 hover:underline">https://github.com/MAGAweSome</a></li>
-                </ul>
+            </div>
+            
+            <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 w-full max-w-3xl">
+                <!-- Email Card -->
+                <a href="mailto:marcus@matrek.com" class="contact-card p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1">
+                    <i class="fa-solid fa-envelope text-purple-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">Email</h3>
+                    <p class="text-gray-400 text-base md:text-lg" style="font-family: 'Times New Roman', Times, serif;">marcus@matrek.com</p>
+                </a>
+                
+                <!-- LinkedIn Card -->
+                <a href="https://www.linkedin.com/in/marcus-grau/" target="_blank" rel="noopener noreferrer" class="contact-card p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1">
+                    <i class="fa-brands fa-linkedin-in text-purple-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">LinkedIn</h3>
+                    <p class="text-gray-400 text-base md:text-lg" style="font-family: 'Times New Roman', Times, serif;">/in/marcus-grau</p>
+                </a>
+
+                <!-- GitHub Card -->
+                <a href="https://github.com/MAGAweSome" target="_blank" rel="noopener noreferrer" class="contact-card p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1">
+                    <i class="fa-brands fa-github text-purple-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2" style="font-family: 'Times New Roman', Times, serif;">GitHub</h3>
+                    <p class="text-gray-400 text-base md:text-lg" style="font-family: 'Times New Roman', Times, serif;">/MAGAweSome</p>
+                </a>
             </div>
         </section>
     </div>
