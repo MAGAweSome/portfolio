@@ -15,3 +15,210 @@
     background-size: 400% 400%;
     animation: move-background 15s ease infinite;
 }
+
+/* Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Tailwind CSS and other global styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom cursor styling */
+body {
+    cursor: none; /* Hide the default cursor */
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d0d;
+}
+
+/* Hide scrollbars */
+html, body {
+    overflow-x: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.cursor-dot {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1000;
+    transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+    opacity: 0.8;
+    mix-blend-mode: difference;
+}
+
+.cursor-dot.active {
+    width: 32px;
+    height: 32px;
+    background-color: #8B5CF6;
+}
+
+/* Prevent default cursor on interactive elements, letting the custom cursor take over */
+a, button, .interactive-element {
+    cursor: none;
+}
+
+/* SVG logo animation using clip-path */
+#hero-logo-m, #hero-logo-g {
+    opacity: 0;
+}
+
+#hero-logo-m {
+    clip-path: inset(0 100% 0 0);
+    animation: clip-text-half-m 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes clip-text-half-m {
+    0% {
+        clip-path: inset(0 100% 0 0);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        clip-path: inset(0 50% 0 0);
+        opacity: 1;
+    }
+}
+
+#hero-logo-g {
+    animation-delay: 0.8s;
+    clip-path: inset(0 100% 0 0);
+    animation: clip-text-logo 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes clip-text-logo {
+    0% {
+        clip-path: inset(0 100% 0 0);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+}
+
+/* Text reveal animation using clip-path */
+.clip-reveal {
+    opacity: 0;
+    animation: clip-text 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(0 100% 0 0);
+}
+
+.clip-reveal.full-width {
+    white-space: normal;
+}
+
+@keyframes clip-text {
+    0% {
+        clip-path: inset(0 100% 0 0);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+}
+
+/* Parallax shapes */
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.parallax-bg .parallax-item {
+    pointer-events: auto; /* Allow clicks on the bubbles */
+    cursor: none;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    background: linear-gradient(135deg, #4F46E5, #8B5CF6);
+    filter: blur(2px);
+}
+
+/* Animation for the "popping" bubbles */
+.pop-animation {
+    animation: pop-bubble 0.5s ease-out forwards;
+}
+
+@keyframes pop-bubble {
+    0% {
+        transform: scale(1);
+        opacity: 0.15;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Updated animation for the hamburger menu */
+.hamburger-menu-button.is-active .menu-icon-line.line-1 {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger-menu-button.is-active .menu-icon-line.line-2 {
+    opacity: 0;
+}
+.hamburger-menu-button.is-active .menu-icon-line.line-3 {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.menu-icon-line {
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease-in-out;
+    transform-origin: center;
+}
+
+/* Mobile menu styling */
+.mobile-nav-menu {
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+}
+.mobile-nav-menu.is-active {
+    transform: translateX(0);
+}
+
+/* Add a subtle hover effect to the projects and contact cards */
+.project-card, .contact-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover, .contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    background-color: #1f2937;
+}
+
+/* Custom scroll-snapping effect for sections */
+.scroll-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.scroll-section {
+    scroll-snap-align: start;
+}
