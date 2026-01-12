@@ -24,12 +24,29 @@ window.onload = function() {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // Custom cursor functionality
+    // Custom cursor functionality (use rAF for smooth & immediate updates)
     if (cursor) {
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let targetCursorX = cursorX;
+        let targetCursorY = cursorY;
+
+        // Update target on mousemove (passive listener for performance)
         window.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
+            targetCursorX = e.clientX;
+            targetCursorY = e.clientY;
+        }, { passive: true });
+
+        // rAF-driven loop to apply position using transform (GPU-accelerated)
+        function updateCursorPosition() {
+            // Set directly to target for immediate responsiveness
+            cursorX = targetCursorX;
+            cursorY = targetCursorY;
+            cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(updateCursorPosition);
+        }
+
+        requestAnimationFrame(updateCursorPosition);
 
         interactiveElements.forEach(element => {
             element.addEventListener('mouseover', () => {
@@ -41,7 +58,10 @@ window.onload = function() {
         });
     }
 
-    // --- Dynamic Floating Bubbles and Parallax Functionality ---
+    // --- Dynamic Floating Bubbles (cursor-interactive) ---
+
+    // Maintain an in-memory array of parallax items to avoid querying DOM each frame
+    const parallaxItems = [];
 
     // Function to create a new floating bubble element
     function createFloatingBubble(initialPlacement = 'bottom') {
@@ -52,52 +72,57 @@ window.onload = function() {
         item.style.width = `${size}px`;
         item.style.height = `${size}px`;
 
-        // Set initial position based on the requested placement
+        // Numeric positions used for transform-only updates
+        let yPos;
         if (initialPlacement === 'random') {
-            // Place bubbles randomly on the screen at the start
-            item.dataset.yPos = Math.random() * window.innerHeight;
+            yPos = Math.random() * window.innerHeight;
         } else {
-            // Place new bubbles at the bottom to float up
-            item.dataset.yPos = window.innerHeight + Math.random() * 100;
+            yPos = window.innerHeight + Math.random() * 100;
         }
 
-        item.dataset.initialX = Math.random() * window.innerWidth;
-        item.dataset.speed = Math.random() * 0.4 + 0.1; // Float speed
+        const initialX = Math.random() * window.innerWidth;
+        const speed = Math.random() * 0.5 + 0.15; // Float speed
 
-        item.style.left = `${item.dataset.initialX}px`;
-        item.style.top = `${item.dataset.yPos}px`;
+        // Gentle horizontal drift so bubbles don't feel "grid-like"
+        const drift = (Math.random() * 0.25 + 0.05) * (Math.random() < 0.5 ? -1 : 1);
+        const wobbleSeed = Math.random() * Math.PI * 2;
 
-        // Add a hover effect to the bubbles themselves to activate the custom cursor
-        item.addEventListener('mouseover', () => cursor.classList.add('active'));
-        item.addEventListener('mouseout', () => cursor.classList.remove('active'));
+        // Store position and speed directly on the element
+        item._yPos = yPos;
+        item._xPos = initialX;
+        item._speed = speed;
+        item._drift = drift;
+        item._wobbleSeed = wobbleSeed;
 
-        // Add click listener for the pop effect, which now resets the bubble
+        // Position via transform only (left kept at 0)
+        item.style.left = '0px';
+        item.style.top = '0px';
+        item.style.position = 'absolute';
+        item.style.pointerEvents = 'auto';
+
+        // Optional: if the custom cursor is enabled later, still support the hover state.
+        if (cursor) {
+            item.addEventListener('mouseover', () => cursor.classList.add('active'));
+            item.addEventListener('mouseout', () => cursor.classList.remove('active'));
+        }
+
+        // Click to pop and reset
         item.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Call the function to pop and reset the bubble
             popAndReset(item);
         });
 
         parallaxContainer.appendChild(item);
+        parallaxItems.push(item);
     }
 
-    // Function to handle the bubble pop animation and reset it to its original state
     function popAndReset(item) {
-        // Prevent multiple animations from running at once
-        if (item.classList.contains('pop-animation')) {
-            return;
-        }
-
-        // Add the animation class to trigger the pop animation
+        if (item.classList.contains('pop-animation')) return;
         item.classList.add('pop-animation');
-
-        // Listen for the animation to finish
         item.addEventListener('animationend', () => {
-            // Reset position and properties to restart the floating animation
             item.classList.remove('pop-animation');
-            item.dataset.yPos = window.innerHeight + Math.random() * 100;
-            item.dataset.initialX = Math.random() * window.innerWidth;
-            item.style.left = `${item.dataset.initialX}px`;
+            item._yPos = window.innerHeight + Math.random() * 100;
+            item._xPos = Math.random() * window.innerWidth;
             item.style.width = `${Math.random() * 80 + 20}px`;
             item.style.height = `${parseFloat(item.style.width)}px`;
         }, { once: true });
@@ -108,51 +133,69 @@ window.onload = function() {
         createFloatingBubble('random');
     }
 
-    // Use requestAnimationFrame for smoother parallax and floating
+    // Use rAF for smooth floating; maintain mouse position
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
-
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-    });
+    }, { passive: true });
 
-    // Animation loop for floating bubbles and mouse parallax
-    function animate() {
-        const parallaxItems = document.querySelectorAll('.parallax-item');
+    // Cursor interaction tuning
+    const interactionRadius = 170; // px
+    const maxRepel = 55; // px
 
-        parallaxItems.forEach(item => {
-            // Only update position if not currently popping
-            if (!item.classList.contains('pop-animation')) {
-                const speed = parseFloat(item.dataset.speed);
+    function animateBubbles(now = 0) {
+        const time = now / 1000;
 
-                // Vertical floating motion (bubble moves up)
-                item.dataset.yPos -= speed;
+        for (let i = 0, len = parallaxItems.length; i < len; i++) {
+            const item = parallaxItems[i];
+            if (item.classList.contains('pop-animation')) continue;
 
-                // If the bubble has floated off the top of the screen, reset its position to the bottom
-                if (item.dataset.yPos < -item.offsetHeight) {
-                    item.dataset.yPos = window.innerHeight + Math.random() * 100;
-                    item.dataset.initialX = Math.random() * window.innerWidth;
-                    item.style.left = `${item.dataset.initialX}px`;
-                    item.style.width = `${Math.random() * 80 + 20}px`;
-                    item.style.height = `${parseFloat(item.style.width)}px`;
-                }
+            const speed = item._speed;
+            item._yPos -= speed;
 
-                // Parallax effect from mouse position
-                const mouseParallaxX = (window.innerWidth / 2 - mouseX) / 100 * speed * 2;
-                const mouseParallaxY = (window.innerHeight / 2 - mouseY) / 100 * speed * 2;
+            // Subtle drift + wobble
+            item._xPos += item._drift;
+            item._xPos += Math.sin(time + item._wobbleSeed) * 0.05;
 
-                // Apply position and parallax using transform for better performance
-                item.style.transform = `translate(${mouseParallaxX}px, ${mouseParallaxY}px)`;
-                item.style.top = `${item.dataset.yPos}px`;
+            if (item._yPos < -parseFloat(item.style.height || 0)) {
+                item._yPos = window.innerHeight + Math.random() * 100;
+                item._xPos = Math.random() * window.innerWidth;
+                item.style.width = `${Math.random() * 80 + 20}px`;
+                item.style.height = `${parseFloat(item.style.width)}px`;
             }
-        });
 
-        requestAnimationFrame(animate);
+            // Wrap horizontally so drift doesn't permanently push bubbles off-screen
+            const bubbleWidth = parseFloat(item.style.width || 0);
+            if (item._xPos < -bubbleWidth) item._xPos = window.innerWidth + bubbleWidth;
+            if (item._xPos > window.innerWidth + bubbleWidth) item._xPos = -bubbleWidth;
+
+            // Cursor repulsion ("interaction")
+            const dx = item._xPos - mouseX;
+            const dy = item._yPos - mouseY;
+            const dist = Math.hypot(dx, dy) || 0.0001;
+            let repelX = 0;
+            let repelY = 0;
+            let scale = 1;
+
+            if (dist < interactionRadius) {
+                const strength = (interactionRadius - dist) / interactionRadius;
+                const push = strength * strength * maxRepel;
+                repelX = (dx / dist) * push;
+                repelY = (dy / dist) * push;
+                scale = 1 + strength * 0.22;
+            }
+
+            const translateX = item._xPos + repelX;
+            const translateY = item._yPos + repelY;
+            item.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+        }
+
+        requestAnimationFrame(animateBubbles);
     }
 
-    // Initial call to start the animation loop
-    animate();
+    requestAnimationFrame(animateBubbles);
 
     // Mobile menu toggle functionality
     if (hamburgerButton && mobileMenu && closeMenuButton) {
@@ -174,5 +217,53 @@ window.onload = function() {
         mobileLinks.forEach(link => {
             link.addEventListener('click', toggleMenu);
         });
+    }
+
+    // --- Smooth in-page navigation without showing #hash in URL ---
+    const fixedNav = document.querySelector('nav');
+
+    function getFixedNavOffset() {
+        if (!fixedNav) return 0;
+        const rect = fixedNav.getBoundingClientRect();
+        return Math.ceil(rect.height);
+    }
+
+    function scrollToHashTarget(hash) {
+        if (!hash || hash === '#') return;
+        const targetId = hash.startsWith('#') ? hash.slice(1) : hash;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        const navOffset = getFixedNavOffset();
+        const extraPadding = 12;
+        const top = window.scrollY + target.getBoundingClientRect().top - navOffset - extraPadding;
+
+        window.scrollTo({ top, behavior: 'smooth' });
+
+        // Remove the hash from the URL without adding a new history entry
+        const cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, document.title, cleanUrl);
+    }
+
+    // Intercept clicks on same-page hash links
+    document.addEventListener('click', (e) => {
+        const link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+
+        e.preventDefault();
+        scrollToHashTarget(href);
+    });
+
+    // If page loads with a hash (e.g., shared link), scroll there but clean the URL
+    if (window.location.hash && window.location.hash !== '#') {
+        const initialHash = window.location.hash;
+        // Clean URL immediately, then scroll
+        const cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, document.title, cleanUrl);
+        // Let layout settle (fonts/nav height) before scrolling
+        setTimeout(() => scrollToHashTarget(initialHash), 0);
     }
 };

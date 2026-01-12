@@ -11,9 +11,8 @@
 
 /* Style the background for the entire page */
 .bg-animated-gradient {
-    background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a); /* A nice dark gradient */
-    background-size: 400% 400%;
-    animation: move-background 15s ease infinite;
+    /* Keep a clean, dark backdrop so the bubbles are the main effect */
+    background: #070a14;
 }
 
 /* Inter font from Google Fonts */
@@ -26,7 +25,7 @@
 
 /* Custom cursor styling */
 body {
-    cursor: none; /* Hide the default cursor */
+    cursor: auto; /* Restore default system cursor */
     font-family: 'Inter', sans-serif;
     background-color: #0d0d0d;
 }
@@ -36,9 +35,15 @@ html, body {
     overflow-x: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+    scroll-behavior: smooth; /* Enable smooth anchor scrolling */
 }
 html::-webkit-scrollbar, body::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
+}
+
+/* Show pointer cursor on any element with an href (anchors, social links, project cards) */
+[href] {
+    cursor: pointer;
 }
 
 .cursor-dot {
@@ -50,20 +55,33 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 1000;
-    transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
-    opacity: 0.8;
+    transition: background-color 0.12s ease, opacity 0.12s ease;
+    opacity: 0.9;
     mix-blend-mode: difference;
+    will-change: transform;
+    transform-origin: center;
 }
 
 .cursor-dot.active {
-    width: 32px;
-    height: 32px;
     background-color: #8B5CF6;
 }
 
-/* Prevent default cursor on interactive elements, letting the custom cursor take over */
-a, button, .interactive-element {
-    cursor: none;
+/* Cursor behavior */
+button,
+.interactive-element {
+    cursor: pointer;
+}
+
+/* Keep standard text inputs as I-beam */
+input,
+textarea,
+[contenteditable="true"] {
+    cursor: text;
+}
+
+/* Hide the custom dot cursor but keep it in the DOM so JS can reference it safely */
+.cursor-dot {
+    display: none !important;
 }
 
 /* SVG logo animation using clip-path */
@@ -152,27 +170,28 @@ a, button, .interactive-element {
 
 .parallax-bg .parallax-item {
     pointer-events: auto; /* Allow clicks on the bubbles */
-    cursor: none;
+    cursor: pointer;
     position: absolute;
     border-radius: 50%;
     opacity: 0.15;
     background: linear-gradient(135deg, #4F46E5, #8B5CF6);
     filter: blur(2px);
+    will-change: transform;
 }
 
 /* Animation for the "popping" bubbles */
 .pop-animation {
-    animation: pop-bubble 0.5s ease-out forwards;
+    animation: pop-bubble 0.45s ease-out forwards;
 }
 
 @keyframes pop-bubble {
     0% {
-        transform: scale(1);
         opacity: 0.15;
+        filter: blur(2px);
     }
     100% {
-        transform: scale(2);
         opacity: 0;
+        filter: blur(6px);
     }
 }
 
