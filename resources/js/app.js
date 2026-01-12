@@ -8,7 +8,54 @@ Alpine.start();
 
 import './bootstrap';
 
+// Ensure reload/refresh doesn't restore previous scroll position
+if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+}
+
+function syncScrollToTop() {
+    // Synchronous scroll-to-top for unload events
+    window.scrollTo(0, 0);
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+}
+
+// On refresh/reload, some browsers restore the last scroll position.
+// Scrolling to top during unload makes the saved position the top.
+window.addEventListener('beforeunload', () => {
+    syncScrollToTop();
+});
+
+window.addEventListener('pagehide', () => {
+    syncScrollToTop();
+});
+
+function forceScrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const fixedNav = document.querySelector('nav');
+    const navOffset = fixedNav ? Math.ceil(fixedNav.getBoundingClientRect().height) : 0;
+    const extraPadding = 12;
+    const top = window.scrollY + section.getBoundingClientRect().top - navOffset - extraPadding;
+
+    // Clean any hash so the URL never shows /#home (or others)
+    if (window.location.hash && window.location.hash !== '#') {
+        const cleanUrl = window.location.pathname + window.location.search;
+        window.history.replaceState(null, document.title, cleanUrl);
+    }
+
+    // Force scroll multiple times (some browsers restore scroll after load)
+    window.scrollTo({ top, left: 0, behavior: 'auto' });
+    requestAnimationFrame(() => window.scrollTo({ top, left: 0, behavior: 'auto' }));
+    setTimeout(() => window.scrollTo({ top, left: 0, behavior: 'auto' }), 50);
+    setTimeout(() => window.scrollTo({ top, left: 0, behavior: 'auto' }), 200);
+}
+
 window.onload = function() {
+    // On reload/refresh always bring user to the Home section
+    forceScrollToSection('home');
+
     // Get all necessary elements
     const cursor = document.querySelector('.cursor-dot');
     const parallaxContainer = document.getElementById('parallax-container');
@@ -257,13 +304,9 @@ window.onload = function() {
         scrollToHashTarget(href);
     });
 
-    // If page loads with a hash (e.g., shared link), scroll there but clean the URL
-    if (window.location.hash && window.location.hash !== '#') {
-        const initialHash = window.location.hash;
-        // Clean URL immediately, then scroll
-        const cleanUrl = window.location.pathname + window.location.search;
-        window.history.replaceState(null, document.title, cleanUrl);
-        // Let layout settle (fonts/nav height) before scrolling
-        setTimeout(() => scrollToHashTarget(initialHash), 0);
-    }
 };
+
+// Also handle bfcache restores (back/forward) where scroll can come back unexpectedly.
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
