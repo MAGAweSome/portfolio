@@ -304,6 +304,42 @@ window.onload = function() {
         scrollToHashTarget(href);
     });
 
+    // --- Scroll-triggered reveals (staggered, in-order) ---
+    const revealSections = document.querySelectorAll('.scroll-section');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function revealInOrder(section) {
+        const elements = section.querySelectorAll('.clip-reveal, .reveal-on-scroll');
+        if (!elements.length) return;
+
+        elements.forEach((el, index) => {
+            const delay = prefersReducedMotion ? 0 : index * 0.12;
+            // Override any inline delays so ordering is consistent
+            el.style.animationDelay = `${delay}s`;
+            el.style.transitionDelay = `${delay}s`;
+            el.classList.add('reveal');
+        });
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const section = entry.target;
+                revealInOrder(section);
+                observer.unobserve(section);
+            });
+        }, {
+            threshold: 0.22,
+            rootMargin: '0px 0px -12% 0px'
+        });
+
+        revealSections.forEach((section) => observer.observe(section));
+    } else {
+        // Fallback: reveal everything immediately
+        revealSections.forEach(revealInOrder);
+    }
+
 };
 
 // Also handle bfcache restores (back/forward) where scroll can come back unexpectedly.

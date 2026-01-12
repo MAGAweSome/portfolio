@@ -69,7 +69,7 @@
 
         <div class="w-full max-w-5xl md:mr-32 lg:mr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-                class="skill-card p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
+                class="skill-card reveal-on-scroll p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
                 <h3 class="text-2xl font-bold text-white mb-4 text-center font-serif">Languages & Databases</h3>
                 <div class="flex flex-wrap justify-center gap-6">
                     <div class="skill-item text-center">
@@ -115,7 +115,7 @@
             </div>
 
             <div
-                class="skill-card p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
+                class="skill-card reveal-on-scroll p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
                 <h3 class="text-2xl font-bold text-white mb-4 text-center font-serif">Frameworks & Libraries</h3>
                 <div class="flex flex-wrap justify-center gap-6">
                     <div class="skill-item text-center">
@@ -147,7 +147,7 @@
             </div>
 
             <div
-                class="skill-card p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
+                class="skill-card reveal-on-scroll p-6 md:p-8 rounded-xl shadow-lg bg-gray-800 border border-gray-700 interactive-element">
                 <h3 class="text-2xl font-bold text-white mb-4 text-center font-serif">Tools & Platforms</h3>
                 <div class="flex flex-wrap justify-center gap-6">
                     <div class="skill-item text-center">
@@ -187,7 +187,7 @@
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl">
             <a href="https://github.com/MAGAweSome/Pickup-Puck" target="_blank"
-                class="project-card p-8 rounded-lg shadow-lg block text-left bg-gray-800 border border-gray-700 interactive-element">
+                class="project-card reveal-on-scroll p-8 rounded-lg shadow-lg block text-left bg-gray-800 border border-gray-700 interactive-element">
                 <h3 class="text-3xl font-bold text-white mb-2 font-serif">
                     <span class="clip-reveal full-width" style="animation-delay: 6.5s;">Pickuppuck</span>
                 </h3>
@@ -206,7 +206,7 @@
                 </p>
             </a>
             <a href="https://github.com/MAGAweSome/NAC-Catechism-Saver" target="_blank"
-                class="project-card p-8 rounded-lg shadow-lg block text-left bg-gray-800 border border-gray-700 interactive-element">
+                class="project-card reveal-on-scroll p-8 rounded-lg shadow-lg block text-left bg-gray-800 border border-gray-700 interactive-element">
                 <h3 class="text-3xl font-bold text-white mb-2 font-serif">
                     <span class="clip-reveal full-width" style="animation-delay: 7.4s;">NAC-Chatechism Saver</span>
                 </h3>
@@ -225,7 +225,7 @@
                 </p>
             </a>
             <a href="https://jordansmobilefleetservice.com" target="_blank"
-                class="project-card p-8 rounded-lg shadow-lg block text-left bg-gray-800 border border-gray-700 interactive-element">
+                class="project-card reveal-on-scroll p-8 rounded-lg shadow-lg block text-left bg-gray-800 border border-gray-700 interactive-element">
                 <h3 class="text-3xl font-bold text-white mb-2 font-serif">
                     <span class="clip-reveal full-width" style="animation-delay: 8.3s;">Jordans Mobile Fleet
                         Service</span>
@@ -261,21 +261,21 @@
         </div>
         <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 w-full max-w-3xl md:mr-32 lg:mr-0">
             <a href="mailto:marcus@matrek.com"
-                class="contact-card p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1 bg-gray-800 border border-gray-700 interactive-element">
+                class="contact-card reveal-on-scroll p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1 bg-gray-800 border border-gray-700 interactive-element">
                 <i class="fa-solid fa-envelope text-purple-400 text-4xl mb-4"></i>
                 <h3 class="text-xl md:text-2xl font-bold text-white mb-2 font-serif">Email</h3>
                 <p class="text-gray-400 text-base md:text-lg font-serif">marcus@matrek.com</p>
             </a>
 
             <a href="https://www.linkedin.com/in/marcus-grau/" target="_blank" rel="noopener noreferrer"
-                class="contact-card p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1 bg-gray-800 border border-gray-700 interactive-element">
+                class="contact-card reveal-on-scroll p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1 bg-gray-800 border border-gray-700 interactive-element">
                 <i class="fa-brands fa-linkedin-in text-purple-400 text-4xl mb-4"></i>
                 <h3 class="text-xl md:text-2xl font-bold text-white mb-2 font-serif">LinkedIn</h3>
                 <p class="text-gray-400 text-base md:text-lg font-serif">/in/marcus-grau</p>
             </a>
 
             <a href="https://github.com/MAGAweSome" target="_blank" rel="noopener noreferrer"
-                class="contact-card p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1 bg-gray-800 border border-gray-700 interactive-element">
+                class="contact-card reveal-on-scroll p-6 md:p-8 rounded-xl shadow-lg flex flex-col items-center text-center flex-1 bg-gray-800 border border-gray-700 interactive-element">
                 <i class="fa-brands fa-github text-purple-400 text-4xl mb-4"></i>
                 <h3 class="text-xl md:text-2xl font-bold text-white mb-2 font-serif">GitHub</h3>
                 <p class="text-gray-400 text-base md:text-lg font-serif">/MAGAweSome</p>
