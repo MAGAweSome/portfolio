@@ -1,281 +1,267 @@
-/* Inter font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+/* Inter & JetBrains Mono fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* resources/css/app.css */
-@keyframes move-background {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Base theme */
+:root {
+    --bg-primary: #07090e;
+    --bg-surface: #0e131f;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(139, 92, 246, 0.35);
+    --accent-glow: rgba(124, 58, 237, 0.15);
 }
 
-/* Style the background for the entire page */
-.bg-animated-gradient {
-    /* Keep a clean, dark backdrop so the bubbles are the main effect */
-    background: #070a14;
+html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
 }
 
-/* Tailwind CSS and other global styles */
-
-/* Custom cursor styling */
 body {
-    cursor: auto; /* Restore default system cursor */
-    font-family: 'Inter', sans-serif;
-    background-color: #0d0d0d;
-}
-
-/* Hide scrollbars */
-html, body {
+    background-color: var(--bg-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #e2e8f0;
     overflow-x: hidden;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    scroll-behavior: smooth; /* Enable smooth anchor scrolling */
-}
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
 }
 
-/* Show pointer cursor on any element with an href (anchors, social links, project cards) */
-[href] {
-    cursor: pointer;
+::selection {
+    background: rgba(139, 92, 246, 0.35);
+    color: #ffffff;
 }
 
-.cursor-dot {
-    width: 12px;
-    height: 12px;
-    background-color: white;
-    border-radius: 50%;
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #07090e;
+}
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* Ambient Radial Glow Gradients in Background */
+.ambient-glow {
     position: fixed;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     pointer-events: none;
-    z-index: 1000;
-    transition: background-color 0.12s ease, opacity 0.12s ease;
-    opacity: 0.9;
-    mix-blend-mode: difference;
-    will-change: transform;
-    transform-origin: center;
-}
-
-.cursor-dot.active {
-    background-color: #8B5CF6;
-}
-
-/* Cursor behavior */
-button,
-.interactive-element {
-    cursor: pointer;
-}
-
-/* Keep standard text inputs as I-beam */
-input,
-textarea,
-[contenteditable="true"] {
-    cursor: text;
-}
-
-/* Hide the custom dot cursor but keep it in the DOM so JS can reference it safely */
-.cursor-dot {
-    display: none !important;
-}
-
-/* SVG logo animation using clip-path */
-#hero-logo-m, #hero-logo-g {
-    opacity: 0;
-}
-
-#hero-logo-m {
-    clip-path: inset(0 100% 0 0);
-    animation: clip-text-half-m 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-
-@keyframes clip-text-half-m {
-    0% {
-        clip-path: inset(0 100% 0 0);
-        opacity: 0;
-    }
-    1% {
-        opacity: 1;
-    }
-    100% {
-        clip-path: inset(0 50% 0 0);
-        opacity: 1;
-    }
-}
-
-#hero-logo-g {
-    animation-delay: 0.8s;
-    clip-path: inset(0 100% 0 0);
-    animation: clip-text-logo 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-
-@keyframes clip-text-logo {
-    0% {
-        clip-path: inset(0 100% 0 0);
-        opacity: 0;
-    }
-    1% {
-        opacity: 1;
-    }
-    100% {
-        clip-path: inset(0 0 0 0);
-        opacity: 1;
-    }
-}
-
-/* Text reveal animation using clip-path */
-.clip-reveal {
-    opacity: 0;
-    animation: clip-text 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    animation-play-state: paused;
-    display: inline-block;
+    z-index: 0;
     overflow: hidden;
-    white-space: nowrap;
-    clip-path: inset(0 100% 0 0);
 }
 
-.clip-reveal.reveal {
-    animation-play-state: running;
+.ambient-glow::before {
+    content: '';
+    position: absolute;
+    top: -15%;
+    left: 20%;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 70%);
+    filter: blur(80px);
+    border-radius: 50%;
 }
 
-/* Generic reveal for cards/blocks (used for Skills/Projects/Contact items) */
-.reveal-on-scroll {
+.ambient-glow::after {
+    content: '';
+    position: absolute;
+    top: 40%;
+    right: 10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.09) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 70%);
+    filter: blur(90px);
+    border-radius: 50%;
+}
+
+/* Glassmorphic card styling */
+.glass-card {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    border-color: rgba(168, 85, 247, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(139, 92, 246, 0.12);
+}
+
+/* Subtle Interactive Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.5);
+    background: linear-gradient(135deg, #8b5cf6 0%, #4f46e5 100%);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Badge pill */
+.badge-tech {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+}
+
+.badge-tech:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #ffffff;
+}
+
+/* Pulsing Status Beacon */
+.status-beacon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: #34d399;
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    position: relative;
+}
+
+.status-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background-color: rgba(16, 185, 129, 0.5);
+    animation: beacon-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes beacon-pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+/* Snappy Scroll Reveal Animation */
+.reveal-item {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
 
-.reveal-on-scroll.reveal {
+.reveal-item.is-revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
-.clip-reveal.full-width {
-    white-space: normal;
-}
-
-@keyframes clip-text {
-    0% {
-        clip-path: inset(0 100% 0 0);
-        opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
-    1% {
-        opacity: 1;
-    }
-    100% {
-        clip-path: inset(0 0 0 0);
-        opacity: 1;
+    .status-dot::after {
+        animation: none;
     }
 }
 
-/* Parallax shapes */
-.parallax-bg {
+/* Copy Toast */
+.copy-toast {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-}
-
-.parallax-bg .parallax-item {
-    pointer-events: auto; /* Allow clicks on the bubbles */
-    cursor: pointer;
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.15;
-    background: linear-gradient(135deg, #4F46E5, #8B5CF6);
-    filter: blur(2px);
-    will-change: transform;
-}
-
-/* Animation for the "popping" bubbles */
-.pop-animation {
-    animation: pop-bubble 0.45s ease-out forwards;
-}
-
-@keyframes pop-bubble {
-    0% {
-        opacity: 0.15;
-        filter: blur(2px);
-    }
-    100% {
-        opacity: 0;
-        filter: blur(6px);
-    }
-}
-
-/* Updated animation for the hamburger menu */
-.hamburger-menu-button.is-active .menu-icon-line.line-1 {
-    transform: translateY(8px) rotate(45deg);
-}
-.hamburger-menu-button.is-active .menu-icon-line.line-2 {
+    bottom: 2rem;
+    right: 2rem;
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    z-index: 100;
+    transform: translateY(100px);
     opacity: 0;
-}
-.hamburger-menu-button.is-active .menu-icon-line.line-3 {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-.menu-icon-line {
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease-in-out;
-    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
 }
 
-/* Mobile menu styling */
-.mobile-nav-menu {
-    transform: translateX(100%);
-    transition: transform 0.4s ease-in-out;
-}
-.mobile-nav-menu.is-active {
-    transform: translateX(0);
+.copy-toast.show {
+    transform: translateY(0);
+    opacity: 1;
 }
 
-/* Add a subtle hover effect to the projects and contact cards */
-.project-card, .contact-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Skill icon hover effect */
+.skill-icon-wrap {
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-.project-card:hover, .contact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    background-color: #1f2937;
-}
-
-/* Custom scroll-snapping effect for sections */
-.scroll-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-}
-
-.scroll-section {
-    scroll-snap-align: start;
-}
-
-/* New styles for the skills section */
-.skill-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.skill-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    background-color: #1f2937;
-}
-
-/*
- * Cool effects for the skill logos on hover
- */
-.logo-hover-effect {
-    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-}
-
-.logo-hover-effect:hover {
-    transform: scale(1.15); /* Slightly bigger pop effect */
-    filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.5)); /* A glow effect with purple shadow */
+.skill-icon-wrap:hover {
+    transform: translateY(-4px) scale(1.08);
+    filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.35));
 }
